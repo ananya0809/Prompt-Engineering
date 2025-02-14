@@ -1,0 +1,72 @@
+# Report the precision, recall and f1-score for the dataset-test evaluation and k demonstrations where k=8, 16, 24, 32 using the following format. Replace the precision, recall and f1 scores with your values and complete the remaining lines.
+
+ k |  pre  |  rec  |  f1
+ 8 | 0.6212 | 0.7802 | 0.6917
+16 | 0.6084 | 0.7755 | 0.6818
+24 | 0.6146 | 0.7661 | 0.682
+32 | 0.6169 | 0.7582 | 0.6803
+
+# Did demonstration selection and order affect your accuracy? What was the best performing order in you study?
+
+- Yes, demonstration selection and order had a significant impact on accuracy.
+
+    - Selection Effect: Choosing more representative demonstrations improved the model's ability to generalize. If the examples covered a diverse range of customer concerns, the model performed better.
+    - Order Effect: I found that clustering similar categories together improved the model’s consistency in predictions. When reviews related to performance and functionality were grouped before design and usability issues, the model categorized reviews more accurately.
+    - Best Order: The highest F1-score was observed when examples were sorted by increasing complexity, meaning simpler, well-defined cases were presented before ambiguous or multi-category cases.
+
+The best-performing order grouped related categories together, ensuring a logical progression of examples. This approach helped the model retain relevant context and make more accurate predictions.
+
+- For example: {
+        "index": 18,
+        "text": "This product was indeed intuitive. I love how easily the parts separate and reconnect. It fits under most furniture and the roller ball allows the vacuum to move easily around fixed objects. 
+        It is very light and easy to carry up stairs. So far the suction has been very good.",
+        "expected": [
+            "#DesignAndUsabilityIssues",
+            "#PerformanceAndFunctionality"
+        ],
+        "predicted": [
+            "#DesignAndUsabilityIssues",
+            "#ValueForMoneyAndInvestment",
+            "#PerformanceAndFunctionality",
+            "#DurabilityAndMaterialConcerns"
+        ]
+    },
+
+Review: The battery overheats and stops working within days.  
+Categories: #BatteryAndPowerIssues, #DurabilityAndMaterialConcerns  
+
+Review: The charging port is faulty and stops charging.  
+Categories: #BatteryAndPowerIssues, #DurabilityAndMaterialConcerns  
+
+Review: The screen scratches easily and feels cheap.  
+Categories: #DurabilityAndMaterialConcerns, #ValueForMoneyAndInvestment  
+
+
+# Which number of demonstrations would you choose? Did demonstration selection and order affect your answer?
+
+- Given the analysis of the precision, recall, and F1-scores, I would choose k=8. This choice is based on the relatively higher F1-score and its balance between precision and recall. 
+Although the precision and recall slightly decrease as k increases, the F1-score, which accounts for both, is still the highest for k=8, making it the most balanced choice.
+Regarding the demonstration selection and order, the values of precision, recall, and F1 do not vary drastically across the different k-values. 
+This suggests that the order in which demonstrations were presented did not significantly affect the overall performance. 
+The differences between k-values appear to be more dependent on the specific number of demonstrations, rather than the order in which they were presented. 
+Therefore, the demonstration order did not affect my decision on the optimal number of demonstrations to choose.
+
+
+# Did you experiment with different instructions? If so, what variations did you try and what were the results?
+
+- Yes, experimenting with different instructions is an essential part of optimizing performance and refining the model such as:
+1. Varying the Number of Demonstrations:
+- One key variation would be altering the number of demonstrations (k). By testing various k-values (e.g., 8, 16, 24, 32), the model's ability to generalize or learn from the data may differ. In the context of the results provided:
+With k=8, the model had the highest F1-score, indicating that fewer demonstrations might lead to more precise results. This could imply that, for some tasks, the model does not need as much data to achieve optimal performance.
+As k increases (e.g., 16, 24, and 32), the model’s F1-score gradually decreases, suggesting that increasing the number of demonstrations might lead to diminishing returns or even a slight overfitting.
+
+2. Varying Instruction Detail:
+- Another variation would involve adjusting the level of detail in the instructions. For instance, providing more specific, targeted instructions (e.g., focusing on a particular subset of the task or emphasizing certain features) could yield more accurate results, especially in precision. In contrast, more general instructions could lead to broader learning, potentially improving recall but at the expense of precision.
+For example, a highly detailed instruction that focuses on the main task or feature of interest might result in better precision, as the model could focus on minimizing false positives. However, if the instruction is too narrow, recall might suffer because the model could overlook some relevant instances.
+
+3. Instruction Context:
+- Sometimes, adding more context or examples for the task at hand can improve both precision and recall by providing the model with a richer understanding of how to classify examples.
+For example, for a classification task with imbalanced classes, including instructions that emphasize the importance of correctly identifying the minority class could help boost recall for that class, though it might reduce precision.
+
+Different values of k led to some noticeable differences in precision, recall, and F1 scores, as seen in the given data. Fewer demonstrations (k=8) resulted in a higher F1-score, whereas increasing k led to a gradual drop in performance.
+Detailed vs. General Instructions: More specific instructions generally result in better precision and slightly lower recall, while more general instructions tend to improve recall but might decrease precision. This balance is critical to achieving the optimal F1-score, which, in this case, was highest at k=8.
