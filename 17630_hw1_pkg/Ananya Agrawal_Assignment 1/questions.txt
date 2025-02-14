@@ -1,0 +1,16 @@
+# What is the Wikipedia URL to the page where your paragraph came from?
+
+https://en.wikipedia.org/wiki/Melatonin
+
+# What was your experience in obtaining correct answers? Reflect on the EM and F1 metrics in your answer and any alternative definitions of correctness in comparison to EM and F1 that you believe are relevant.
+
+The experience in obtaining correct answers was mixed. The EM metric was strict, often resulting in low scores due to minor discrepancies in wording. The F1 score provided a more nuanced evaluation by considering partial matches. Alternative definitions of correctness could include semantic similarity, where the meaning of the answer is considered rather than exact wording.
+
+# Describe how you experimented with different prompts to obtain your results? Consider the first prompt you used, and your final prompt, and the intermediate changes that you made and how those affected your results.
+
+Initially, the prompt was simple, asking the model to answer the question based on the paragraph. This resulted in verbose answers. The final prompt instructed the model to provide concise answers without additional commentary, which improved the precision of the responses. Intermediate changes included adding instructions to avoid elaboration, which reduced irrelevant information in the answers.
+
+# What were your average EM and F1 scores for each of the three models
+gpt-4o: EM = 0.7000, F1 = 0.8828
+gpt-4o-mini: EM = 0.6000, F1 = 0.9244
+gpt-3.5-turbo: EM = 0.5000, F1 = 0.7419
