@@ -1,0 +1,65 @@
+# Classification tasks often result in mis-classification. Based your inspection of the false positives, what may be some reasons the language model misclassified a non-meeting message as a meeting message?
+
+Potential Reasons for Misclassification:
+- Ambiguous Language: Some emails referenced events, discussions, or general workplace activities that the model mistook for meetings (e.g., "Let's discuss this tomorrow" vs. "Let's meet tomorrow").
+
+- Keyword Over-Reliance: The model likely overweighted certain keywords like "meeting," "schedule," "discussion," or "event," causing false positives in emails that weren’t actual meetings.
+
+- Lack of Context Understanding: Some misclassified emails contained references to past meetings or industry events but weren’t actually invitations, reminders, or updates.
+
+- Emails with Attachments: Some emails referenced attachments with agendas or schedules without explicitly mentioning a meeting in the body text, leading to misclassification.
+
+- Short Emails & Lack of Detail: Emails with minimal context or vague wording may have made it difficult for the model to determine if it was truly a meeting-related message.
+
+# What was your accuracy for the classification step?
+
+Final Classification Accuracy: 94.00%
+
+
+# When extracting the date and time of a meeting, what what challenges did you observe? How did you handle these?
+
+Challenges & Fixes:
+
+1. Missing Year in Some Dates (MM-DD-0000)
+
+Fix: Defaulted missing years to "2024".
+
+2. Missing Time Information (HH:MM-HH:MM missing)
+
+Fix: Assigned default time ranges:
+"Morning" → 09:00-12:00
+"Afternoon" → 13:00-17:00
+"Evening" → 18:00-20:00
+
+3. Emails with Multiple Dates & Times
+
+Some emails contained multiple meetings (e.g., weekly recurrences).
+Fix: Extracted all instances and stored them as a semicolon-separated list.
+
+4. "Next Monday" or "Later this week" Without a Specific Date
+
+Fix: Returned "none" instead of guessing.
+
+5. Handling Time Zones
+
+Some meeting invitations had explicit time zones (PST, CST, GMT).
+Fix: If no time zone was mentioned, assumed Eastern Standard Time (EST) as default.
+
+
+# What was your precision, recall and F-1 score for date extraction?
+
+Date-Time Extraction Precision: 91.30%
+Date-Time Extraction Recall: 93.33%
+Date-Time Extraction F1 Score: 92.31%
+
+
+# If you handled timezone information, what rules did you use to best approximate the meeting timezone?
+
+Timezone Handling Rules:
+- Explicit Time Zones: If an email explicitly stated a timezone (e.g., "Meeting at 3 PM PST"), we used the provided timezone.
+
+- No Timezone Mentioned: If no timezone was given, we defaulted to EST (Eastern Standard Time) based on standard corporate meeting locations.
+
+- Global Events: If the meeting mentioned global participation (e.g., "across multiple regions"), we flagged it for manual review instead of assuming a single timezone.
+
+

@@ -1,0 +1,39 @@
+[
+    {
+        "index": 0,
+        "available": [
+            "no (14x)",
+            "yes"
+        ]
+    },
+    {
+        "index": 1,
+        "available": [
+            "no (5x)"
+        ]
+    },
+    {
+        "index": 2,
+        "available": [
+            "no (3x)"
+        ]
+    },
+    {
+        "index": 3,
+        "available": [
+            "no"
+        ]
+    },
+    {
+        "index": 4,
+        "available": [
+            "no"
+        ]
+    },
+    {
+        "index": 8,
+        "available": [
+            "no (2x)"
+        ]
+    }
+]
