@@ -1,0 +1,38 @@
+[
+    {
+        "query": "What are the limitations of RAG models?",
+        "answer": "RAG models may struggle with long-tail or rare knowledge not covered in the indexed documents, and they can return irrelevant results if queries don't precisely match indexed content."
+    },
+    {
+        "query": "Describe the FLARE model for long-form generation.",
+        "answer": "The FLARE model iteratively generates temporary next sentences as queries to retrieve relevant documents, regenerating content until enough context is gathered."
+    },
+    {
+        "query": "Which paper introduced the concept of RAG?",
+        "answer": "Retrieval-Augmented Generation (RAG) was introduced by Lewis et al. in 2020."
+    },
+    {
+        "query": "What are the benefits of overlapping chunks in RAG?",
+        "answer": "Overlapping chunks help preserve context across boundaries, reducing the chance of losing relevant sentences that might otherwise be split across separate chunks."
+    },
+    {
+        "query": "How does chunk size impact retrieval accuracy?",
+        "answer": "Smaller chunks increase retrieval granularity, while larger chunks provide more context — finding the right balance is key to optimizing RAG performance."
+    },
+    {
+        "query": "Why is prompt augmentation important in RAG?",
+        "answer": "Prompt augmentation improves RAG accuracy by enriching the model's input context, helping it better match and synthesize relevant information from retrieved documents."
+    },
+    {
+        "query": "Which model is most efficient for small-scale RAG systems?",
+        "answer": "IDK"
+    },
+    {
+        "query": "Is there a universal chunk size for all RAG tasks?",
+        "answer": "IDK"
+    },
+    {
+        "query": "Can RAG completely eliminate hallucinations in LLMs?",
+        "answer": "IDK"
+    }
+]

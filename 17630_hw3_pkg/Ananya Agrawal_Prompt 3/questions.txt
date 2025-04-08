@@ -1,0 +1,40 @@
+# How did you pre-process the data, and what considerations did you have in deciding your pre-process procedure?
+
+I pre-processed the data to remove noise and irrelevant content that could degrade retrieval performance. The cleaning steps included:
+
+1. Removing URLs and email addresses: Prevented retrieval interference from metadata.
+2. Stripping author names and affiliations: Avoided biasing the index towards author names instead of paper content.
+3. Eliminating section headers, references, and figure/table captions: Cleaned out non-informative elements that don’t help with answering queries.
+4. Handling special characters and emojis: Ensured consistent tokenization and embedding quality.
+
+I chose this approach because research papers often contain structural artifacts that don’t contribute to meaningful answers. Cleaning this up helped improve the signal-to-noise ratio for retrieval and question generation.
+
+# How did you chunk and index your data? What indices did you consider and which one did you finally choose?
+
+I used a sliding window chunking strategy with overlap to retain context:
+
+Chunk Size: 768 tokens
+Overlap: 200 tokens
+Overlapping chunks helped capture sentences split across boundaries, reducing the risk of missing relevant context. After chunking, I prompted the model to generate 3 questions per chunk, which were indexed in ChromaDB using Sentence Transformers for embedding generation.
+
+I experimented with different chunk sizes (256, 512, 768 tokens) and found that 768 tokens with overlap offered the best balance between context retention and retrieval accuracy.
+
+# What discrepencies did you see between the generated answers and the text provided by the retriever? Were any of the answers plausable hallucinations?
+
+I observed a few discrepancies:
+
+1. Incomplete Answers: Some generated answers were incomplete because relevant information was spread across multiple chunks, even with overlapping windows.
+2. Paraphrasing Drift: The model sometimes paraphrased retrieved content but drifted away from the exact meaning, especially for complex technical details.
+3. Mild Hallucinations: When relevant content was sparse, the model occasionally stitched unrelated concepts from retrieved chunks — although adding the "IDK" fallback reduced this issue.
+
+By expanding queries and reranking retrieved chunks with BERTScore, I reduced hallucinations and improved the accuracy of generated responses.
+
+
+
+# Report the precision (P), recall (R) and F1 scores for the queries provided, plus your own queries
+
+            P	      R	      	F1
+Provided    0.31      0.45      0.36
+Your own    0.30      0.52 	    0.38
+
+The recall scores are relatively high, showing that the system retrieved relevant content for most queries.
